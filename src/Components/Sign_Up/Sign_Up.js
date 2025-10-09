@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Sign_Up.css";
+import { Link } from "react-router-dom";
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -9,6 +10,8 @@ function SignUp() {
     password: "",
   });
 
+  const [successMessage, setSuccessMessage] = useState(""); // ✅ New state for success message
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -16,6 +19,7 @@ function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setSuccessMessage(""); // clear previous message
 
     // Check all fields are filled
     if (!formData.name || !formData.phone || !formData.email || !formData.password) {
@@ -30,8 +34,17 @@ function SignUp() {
       return;
     }
 
+    // Simulate account creation success
     console.log("Form submitted:", formData);
-    // Normally you would send data to your server here
+    setSuccessMessage("Account created successfully!");
+
+    // Clear fields after successful submission
+    setFormData({
+      name: "",
+      phone: "",
+      email: "",
+      password: "",
+    });
   };
 
   return (
@@ -44,9 +57,7 @@ function SignUp() {
         <div className="signup-text1">
           Already a member?{" "}
           <span>
-            <a href="../Login/Login.html" style={{ color: "#2190FF" }}>
-              Login
-            </a>
+            <Link to="/login" style={{ color: "#2190FF" }}>Login</Link>
           </span>
         </div>
 
@@ -112,11 +123,22 @@ function SignUp() {
               <button type="submit" className="btn btn-primary">
                 Submit
               </button>
-              <button type="reset" className="btn btn-danger">
+              <button
+                type="reset"
+                className="btn btn-danger"
+                onClick={() => setFormData({ name: "", phone: "", email: "", password: "" })}
+              >
                 Reset
               </button>
             </div>
           </form>
+
+          {/* ✅ Success message appears here */}
+          {successMessage && (
+            <p style={{ color: "green", marginTop: "15px", fontWeight: "bold" }}>
+              {successMessage}
+            </p>
+          )}
         </div>
       </div>
     </div>

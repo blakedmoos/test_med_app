@@ -1,1 +1,0 @@
-This medical appointment booking website is to serve as a portal for users to view doctors, make appointments, write reviews, or medically self help through their account or through a guest account.

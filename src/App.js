@@ -11,7 +11,7 @@ import Navbar from './Components/Navbar/Navbar';
 import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultation';
 
 //Import Doctor Search
-import DoctorSearch from './Components/FindDoctorSearch/FindDoctorSearch';
+import BookingConsultation from './Components/BookingConsultation/BookingConsultation';
 
 //Import Landing Page component
 import Landing_Page from './Components/Landing_Page/Landing_Page';
@@ -34,7 +34,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Landing_Page/>}/>
             <Route path="/instant-consultation" element={<InstantConsultation />} />
-            <Route path="/doctor-search" element={<DoctorSearch />} />
+            <Route path="/booking-consultation" element={<BookingConsultation />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Sign_Up />} />
           </Routes>

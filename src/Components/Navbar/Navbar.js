@@ -61,10 +61,10 @@ const Navbar = () => {
           <Link to="/">Home</Link>
         </li>
         <li className="link">
-          <Link to="/instant-consultation">Appointments</Link>
+          <Link to="/instant-consultation">Instant Consultation</Link>
         </li>
         <li className="link">
-          <Link to="/healthblog">Health Blog</Link>
+          <Link to="/doctor-search">Find Doctor</Link>
         </li>
         <li className="link">
          <Link to="/reviews">Reviews</Link>

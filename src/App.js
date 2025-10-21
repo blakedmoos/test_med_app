@@ -30,6 +30,7 @@ function App() {
           {/* Set up the Routes for different pages */}
           <Routes>
             <Route path="/" element={<Landing_Page/>}/>
+            <Route path="/instant-consultation" element={<InstantConsultation />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Sign_Up />} />
           </Routes>

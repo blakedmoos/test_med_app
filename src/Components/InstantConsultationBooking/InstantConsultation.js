@@ -11,25 +11,31 @@ const InstantConsultation = () => {
     const [isSearched, setIsSearched] = useState(false);
     
     const getDoctorsDetails = () => {
-        fetch('https://api.npoint.io/9a5543d36f1460da2f63')
-        .then(res => res.json())
-        .then(data => {
+        fetch(`${process.env.PUBLIC_URL}/doctors.json`)
+          .then(res => {
+            if (!res.ok) throw new Error('Network response was not ok');
+            return res.json();
+          })
+          .then(data => {
+            // optional: log to confirm
+            console.log('Loaded local doctors:', data);
+      
             if (searchParams.get('speciality')) {
-                // window.reload()
-                const filtered = data.filter(doctor => doctor.speciality.toLowerCase() === searchParams.get('speciality').toLowerCase());
-
-                setFilteredDoctors(filtered);
-                
-                setIsSearched(true);
-                window.reload()
+              const specialityParam = searchParams.get('speciality').toLowerCase();
+              const filtered = data.filter(
+                doctor => doctor.speciality && doctor.speciality.toLowerCase() === specialityParam
+              );
+              setFilteredDoctors(filtered);
+              setIsSearched(true);
             } else {
-                setFilteredDoctors([]);
-                setIsSearched(false);
+              setFilteredDoctors([]);
+              setIsSearched(false);
             }
             setDoctors(data);
-        })
-        .catch(err => console.log(err));
-    }
+          })
+          .catch(err => console.error('Failed to load doctors.json:', err));
+      };
+      
     const handleSearch = (searchText) => {
 
         if (searchText === '') {

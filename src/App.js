@@ -7,6 +7,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // Import custom Navbar component
 import Navbar from './Components/Navbar/Navbar';
 
+//Import Instant Consultation component
+import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultation';
+
 //Import Landing Page component
 import Landing_Page from './Components/Landing_Page/Landing_Page';
 

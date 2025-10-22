@@ -1,91 +1,109 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
+import { API_URL } from '../../config';
 
-function Login() {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!formData.email || !formData.password) {
-      alert("Please fill out both email and password.");
-      return;
+const Login = () => {
+  // State variables for email and password
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  // Get navigation function from react-router-dom
+  const navigate = useNavigate();
+  // Check if user is already authenticated, then redirect to home page
+  useEffect(() => {
+    if (sessionStorage.getItem("auth-token")) {
+      navigate("/");
     }
-
-    console.log("Login submitted:", formData);
-    // Handle login logic (API call)
+  }, []);
+  // Function to handle login form submission
+  const login = async (e) => {
+    e.preventDefault();
+    // Send a POST request to the login API endpoint
+    const res = await fetch(`${API_URL}/api/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+    // Parse the response JSON
+    const json = await res.json();
+    if (json.authtoken) {
+      // If authentication token is received, store it in session storage
+      sessionStorage.setItem('auth-token', json.authtoken);
+      sessionStorage.setItem('email', email);
+      // Redirect to home page and reload the window
+      navigate('/');
+      window.location.reload();
+    } else {
+      // Handle errors if authentication fails
+      if (json.errors) {
+        for (const error of json.errors) {
+          alert(error.msg);
+        }
+      } else {
+        alert(json.error);
+      }
+    }
   };
-
   return (
-    <div className="container">
-      <div className="login-grid">
-        <div className="login-text">
-          <h2>Login</h2>
-        </div>
-
-        <div className="login-text">
-          Are you a new member? <span>
-            <Link to="/signup" style={{ color: "#2190FF" }}>Sign Up Here</Link>
+    <div>
+      <div className="container">
+        <div className="login-grid">
+          <div className="login-text">
+            <h2>Login</h2>
+          </div>
+          <div className="login-text">
+            Are you a new member? 
+            <span>
+              <Link to="/signup" style={{ color: '#2190FF' }}>
+                Sign Up Here
+              </Link>
             </span>
-
-        </div>
-
-        <div className="login-form">
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                required
-                className="form-control"
-                placeholder="Enter your email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
+          </div>
+          <br />
+          <div className="login-form">
+            <form onSubmit={login}>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                {/* Input field for email */}
+                <input 
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)} 
+                  type="email" 
+                  name="email" 
+                  id="email" 
+                  className="form-control" 
+                  placeholder="Enter your email" 
+                  aria-describedby="helpId" 
+                />
+              </div>
+              <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 name="password"
                 id="password"
-                required
                 className="form-control"
                 placeholder="Enter your password"
-                value={formData.password}
-                onChange={handleChange}
-              />
+            />
             </div>
-
-            <div className="btn-group">
-              <button type="submit" className="btn btn-primary">
-                Login
-              </button>
-              <button type="reset" className="btn btn-danger">
-                Reset
-              </button>
-            </div>
-
-            <div className="login-text" style={{ marginTop: "10px" }}>
-              Forgot Password?
-            </div>
-          </form>
+              <div className="btn-group">
+                {/* Login button */}
+                <button type="submit" className="btn btn-primary mb-2 mr-1 waves-effect waves-light">
+                  Login
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
-
 export default Login;

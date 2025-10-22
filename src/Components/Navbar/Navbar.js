@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 
 import "./Navbar.css";
 
-
-
 const Navbar = () => {
     const [click, setClick] = useState(false);
 
@@ -69,14 +67,16 @@ const Navbar = () => {
         <li className="link">
          <Link to="/reviews">Reviews</Link>
         </li>
-        {isLoggedIn?(
+        {isLoggedIn ? (
           <>
+            <li className="link welcome-message">
+              Welcome, <strong>{displayName}</strong>
+            </li>
             <li className="link">
               <button className="btn2" onClick={handleLogout}>
                 Logout
               </button>
             </li>
-            
           </>
         ) : (
           <>

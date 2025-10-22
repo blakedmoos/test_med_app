@@ -23,6 +23,11 @@ const Sign_Up = () => {
       return;
     }
 
+    if (name.length < 4) {
+        setShowerr('Name should be at least 4 characters.');
+        return;
+      }
+
     // Validate phone number (10 digits)
     const phoneRegex = /^\d{10}$/;
     if (!phoneRegex.test(phone)) {
@@ -30,15 +35,26 @@ const Sign_Up = () => {
       return;
     }
 
-    try {
-      // API call to register user
-      const response = await fetch(`${API_URL}/api/auth/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password, phone }),
-      });
+    // Password validation: at least 8 characters
+    if (password.length < 8) {
+        setShowerr('Password should be at least 8 characters.');
+        return;
+      }
 
-      const json = await response.json();
+    const response = await fetch(`${API_URL}/api/auth/register`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            name: name,
+            email: email,
+            password: password,
+            phone: phone,
+        }),
+    });
+    const json = await response.json(); // Parse the response JSON
+
 
       if (json.authtoken) {
         // Save user data in session storage
@@ -51,16 +67,15 @@ const Sign_Up = () => {
         navigate('/'); // Redirect to home page
         window.location.reload(); // Reload to update navbar
       } else {
-        if (json.errors && json.errors.length > 0) {
-          setShowerr(json.errors[0].msg);
+        if (json.errors) {
+            for (const error of json.errors) {
+                setShowerr(error.msg); // Show error messages
+            }
         } else {
-          setShowerr(json.error || 'Something went wrong. Try again.');
+            setShowerr(json.error);
         }
-      }
-    } catch (err) {
-      setShowerr('Server error. Please try again later.');
     }
-  };
+};
 
   // Render the Sign Up form
   return (
@@ -144,10 +159,16 @@ const Sign_Up = () => {
                 Sign Up
               </button>
               <button
-                type="reset"
+                type="button" // change to "button" so it doesn't trigger default form reset
                 className="btn btn-danger"
-                onClick={() => setShowerr('')}
-              >
+                onClick={() => {
+                    setName('');
+                    setEmail('');
+                    setPhone('');
+                    setPassword('');
+                    setShowerr('');
+                }}
+                >
                 Reset
               </button>
             </div>

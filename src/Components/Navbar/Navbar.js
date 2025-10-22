@@ -44,6 +44,8 @@ const Navbar = () => {
             setUsername(storedemail);
           }
         }, []);
+
+        const displayName = username ? username.split('@')[0] : '';
   return (
     <nav>
       <div className="nav__logo">

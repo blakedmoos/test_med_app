@@ -84,7 +84,7 @@ const Notification = ({ children }) => {
                 <button className="close-btn" onClick={handleCloseNotification}>×</button>
               </div>
               <p className="appointment-card__message">
-                <strong>Patient:</strong> {username}
+                <strong>Patient Email:</strong> {username}
               </p>
               <p className="appointment-card__message">
                 <strong>Doctor:</strong> {doctorData?.name}

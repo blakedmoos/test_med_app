@@ -4,18 +4,20 @@ import React from 'react';
 // Import components for routing from react-router-dom library
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-// Import custom Navbar component
-import Navbar from './Components/Navbar/Navbar';
+// Import Notification component
 import Notification from './Components/Notification/Notification';
 
 //Import Instant Consultation component
 import InstantConsultation from './Components/InstantConsultationBooking/InstantConsultation';
 
-//Import Doctor Search
+//Import Booking Component
 import BookingConsultation from './Components/BookingConsultation/BookingConsultation';
 
 //Import Landing Page component
 import Landing_Page from './Components/Landing_Page/Landing_Page';
+
+//Import Review Form Component
+import Review from './Components/ReviewForm/ReviewForm'
 
 import Login from './Components/Login/Login';
 import Sign_Up from './Components/Sign_Up/Sign_Up';
@@ -35,6 +37,7 @@ function App() {
             <Route path="/" element={<Landing_Page/>}/>
             <Route path="/instant-consultation" element={<InstantConsultation />} />
             <Route path="/booking-consultation" element={<BookingConsultation />} />
+            <Route path="/review-form" element={<Review />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Sign_Up />} />
           </Routes>

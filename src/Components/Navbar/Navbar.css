@@ -1,4 +1,3 @@
-
 nav {
     padding: 1.5rem;
     position: fixed;
@@ -13,48 +12,41 @@ nav {
     color: white;
 }
 
-/* Styling for the dropdown menu */
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1;
-    display: none;
-    min-width: 120px;
-    padding: 8px 0;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-}
-
 /* Styling for the user welcome message */
-.welcome-user {
-    position: relative;
+.welcome-message {
+    position: relative; /* needed for absolute dropdown */
     cursor: pointer;
 }
 
-/* Display dropdown menu on hover */
-.welcome-user:hover .dropdown-menu {
-    display: block;
+/* Profile dropdown menu */
+.profile-dropdown {
+    position: absolute;
+    top: 120%; /* slightly below the welcome message */
+    right: 0;
+    width: 180px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    padding: 5px 0;
 }
 
-/* Styling for the items in the dropdown menu */
-.dropdown-menu li {
-    display: block;
-    width: 150px;
-    padding:5px;
-}
-
-/* Styling for links in the dropdown menu */
-.dropdown-menu li a {
+/* Items inside the profile dropdown */
+.profile-dropdown .dropdown-item {
+    padding: 10px 15px;
+    text-align: left;
+    font-weight: 500;
     color: #333;
     text-decoration: none;
-    transition: color 0.3s ease;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
 }
 
-/* Hover effect for links in the dropdown menu */
-.dropdown-menu li a:hover {
-    color: #2190ff;
+.profile-dropdown .dropdown-item:hover {
+    background-color: #f0f4f8;
 }
 
 /* Styling for the logo in the navbar */
@@ -69,19 +61,18 @@ nav {
 }
 
 .nav__logo a {
-  color: white;          /* make the link text white */
-  text-decoration: none; /* remove underline */
+  color: white;
+  text-decoration: none;
 }
 
 .nav__logo a:visited {
-  color: white;          /* ensure visited links stay white */
+  color: white;
 }
 
 .nav__logo a:hover {
-  color: #3685fb;        /* optional hover accent */
+  color: #3685fb;
 }
 
-/* Styling for a span within the logo */
 .nav__logo span {
     color: #3685fb;
 }
@@ -146,7 +137,7 @@ nav {
         border-radius: 0.5rem;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         z-index: 999;
-        animation: slideDown 0.5s ease-in-out; /* Animation effect */
+        animation: slideDown 0.5s ease-in-out;
     }
 }
 
@@ -171,8 +162,8 @@ nav {
 }
 
 .btn1:hover {
-    background-color: #3685fb; /* Hover effect */
-    color: white; /* Hover effect */
+    background-color: #3685fb;
+    color: white;
 }
 
 .btn2 {
@@ -181,14 +172,13 @@ nav {
     color: black;
     border-radius: 50px;
     height:30px;
-    display:flex; /* Align items and justify content */
-    align-items:center; /* Align items and justify content */
-    justify-content:center; /* Align items and justify content */
-    margin-top:3px; /* Margin from top */
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:3px;
 }
 
 .btn2:hover {
-    background-color:#3685fb; /* Hover effect */
-    color:white; /* Hover effect */
+    background-color:#3685fb;
+    color:white;
 }
-  

@@ -22,6 +22,9 @@ import Review from './Components/ReviewForm/ReviewForm'
 import Login from './Components/Login/Login';
 import Sign_Up from './Components/Sign_Up/Sign_Up';
 
+import Profile from './Components/ProfileCard/ProfileCard';
+import Report from './Components/ReportsLayout/ReportsLayout';
+
 // Function component for the main App
 function App() {
 
@@ -40,6 +43,8 @@ function App() {
             <Route path="/review-form" element={<Review />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Sign_Up />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/report" element={<Report />} />
           </Routes>
           </Notification>
         </BrowserRouter>
